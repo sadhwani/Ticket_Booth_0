@@ -47,6 +47,7 @@ void Venue_from_User::Add_Seat_Rows(Venue* venue)
         string seat_row_name;
         string junk;
         int number_of_seats;
+        string section_name;
         cout << "Seat row name: ";
         getline(cin, seat_row_name);
         if (seat_row_name.length() == 0)
@@ -56,7 +57,10 @@ void Venue_from_User::Add_Seat_Rows(Venue* venue)
         cout << "Number of seats: ";
         cin >> number_of_seats;
         getline(cin, junk);
-        venue->Add_Row(seat_row_name, number_of_seats);
+        cout << "Section name: ";
+        getline(cin, seat_row_name);
+
+        venue->Add_Row(seat_row_name, number_of_seats, section_name);
     }
 }
 

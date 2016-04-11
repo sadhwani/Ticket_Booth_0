@@ -8,9 +8,10 @@
 using namespace std;
 
 Seat::Seat (const string& Row_Name,
-            int Seat_Number) :
+            int Seat_Number, const string& Seat_Section) :
         seat_row_name(Row_Name),
-        seat_number(Seat_Number)
+        seat_number(Seat_Number),
+        seat_section(Seat_Section)
 {}
 
 
@@ -18,6 +19,7 @@ Seat::Seat (const string& Row_Name,
 void Seat::Display() const
 {
     cout << "Row " << seat_row_name << " ";
-    cout << "Seat " << seat_number << endl;
+    cout << "Seat " << seat_number << " ";
+    cout << "Section " << seat_section << endl;
 }
 

@@ -12,7 +12,7 @@ Venue::Venue(const string& Name,
 {}
 
 void Venue::Add_Row(const string& Row_Name, 
-                    int Number_of_Seats)
+                    int Number_of_Seats, const string& Section_Name)
 {
     if (number_of_seat_rows >= MAX_SEAT_ROWS)
     {
@@ -20,7 +20,7 @@ void Venue::Add_Row(const string& Row_Name,
     }
 
     unsigned int i = number_of_seat_rows++;
-    seat_row[i] = new Seat_Row(Row_Name, Number_of_Seats);
+    seat_row[i] = new Seat_Row(Row_Name, Number_of_Seats, Section_Name);
 }
 
 void Venue::Add_Seating_Section(Seating_Section* new_seating_section)
