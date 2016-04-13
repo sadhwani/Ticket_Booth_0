@@ -2,12 +2,12 @@
 #include <iostream>
 #include <string.h>
 #include "Seat_Row.h"
-
+#include <cassert>
 using namespace std;
 
 Seat_Row::Seat_Row(const string& Row_Name,
-                   int Number_of_Seats, const string& Section_Name) :
-                   row_name(Row_Name), number_of_seats(Number_of_Seats), section_name(Section_Name)
+                   int Number_of_Seats) :
+                   row_name(Row_Name), number_of_seats(Number_of_Seats)
 {
     // commenting out so I can set the seats array from the XML file
 //    seats = new Seat*[number_of_seats];
@@ -26,13 +26,21 @@ const Seat* Seat_Row::Get_Seat(int idx) const
     return seats[idx];
 }
 
-void Seat_Row::Set_Seats(Seat** seatsArray) {
-    seats = seatsArray;
+void Seat_Row::Set_Seats( Seat** seatsArray) {
+    //seats = seatsArray;
 }
 
 void Seat_Row::Display() const
 {
     cout << "Row " << row_name << " Seats  1 - " 
-         << number_of_seats << " Section: " << section_name << endl;
+         << number_of_seats << endl;
+	//<< number_of_seats << " Section: " << section_name << endl;
 }
+//This adds a seat to the array of seats for the certain seat row.
 
+void Seat_Row::Add_Seat(Seat* new_seat)
+{
+	assert(number_of_seats < MAX_SEATS_PER_ROW);
+	seats[number_of_seats++] = new_seat;
+	
+}

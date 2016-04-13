@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Venue.h"
+#include <cassert>
 
 using namespace std;
 
@@ -11,7 +12,7 @@ Venue::Venue(const string& Name,
     number_of_seating_sections(0)
 {}
 
-void Venue::Add_Row(const string& Row_Name, 
+/*void Venue::Add_Row(const string& Row_Name, 
                     int Number_of_Seats, const string& Section_Name)
 {
     if (number_of_seat_rows >= MAX_SEAT_ROWS)
@@ -20,7 +21,14 @@ void Venue::Add_Row(const string& Row_Name,
     }
 
     unsigned int i = number_of_seat_rows++;
-    seat_row[i] = new Seat_Row(Row_Name, Number_of_Seats, Section_Name);
+	seat_row[i] = new Seat_Row(Row_Name, Number_of_Seats);
+}
+*/
+void Venue::Add_Row(Seat_Row *row)
+{
+	assert(number_of_seat_rows < MAX_SEAT_ROWS);
+	seat_row[number_of_seat_rows++] = row;
+
 }
 
 void Venue::Add_Seating_Section(Seating_Section* new_seating_section)
@@ -47,8 +55,14 @@ int Venue::Capacity() const
 
 void Venue::Display() const
 {
-    cout << name << endl;
+    //cout << name << endl;
     address.Display();
+
+	for (int i = 0; i < number_of_seat_rows; i++)
+	{
+		seat_row[i]->Display();
+	}
+	
 }
 
 void Venue::Display_All() const

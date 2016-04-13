@@ -28,8 +28,9 @@ public:
           const Address& Address);
     Venue() {};
 
-    void Add_Row(const string& Row_Name, 
-                 int Number_of_Seats, const string& Section_Name);
+   // void Add_Row(const string& Row_Name, 
+                 //int Number_of_Seats, const string& Section_Name);
+	void Add_Row(Seat_Row *row);
 
     void Add_Seating_Section(Seating_Section* new_seating_section);
 

@@ -8,6 +8,7 @@ using namespace std;
 
 void Venue_From_xml::Get_Venue(TiXmlNode* venue_node)
 {
+
 	TiXmlNode* name_node = venue_node->FirstChild();
 	assert(name_node != 0);
 	//cout << name_node->Value() << endl;
@@ -21,14 +22,21 @@ void Venue_From_xml::Get_Venue(TiXmlNode* venue_node)
 	//cout << address_node->Value() << endl;
 	Address* address = Get_Address(address_node);
 
+	Venue *venue = new Venue(name_node->FirstChild()->Value(), *address);
+
 	TiXmlNode* seat_row_node = address_node->NextSibling();
 	assert(seat_row_node != 0);
-	Get_Seats(seat_row_node);
+	Get_Seats(seat_row_node,venue);
     
-    Venue *venue = new Venue(name_node->FirstChild()->Value(), *address);
-    venue->Display();
+   
+	venue->Display();
     
-    /* Still need to add collection of Seat_Rows and Sections to Venue
+   
+	
+	
+	
+	
+	/* Still need to add collection of Seat_Rows and Sections to Venue
         Give Seat_Row Add_Seat method
         Implement Section
         Give Section Add_Seat method
@@ -61,46 +69,50 @@ Address* Venue_From_xml::Get_Address(TiXmlNode* address_node)
     strValue >> zipCode;
     
     Address *address = new Address(street_node->FirstChild()->Value(), city_node->FirstChild()->Value(), state_node->FirstChild()->Value(), zipCode);
-    //address->Display();
+    //address->Display(); //fefjdhgfjdshfjkhdkfjsdf
     return address;
 }
 
 Seat_Row* Venue_From_xml::Get_Seat_Row(TiXmlNode* seat_row_node)
 {
-	//cout << seat_row_node->Value() << endl;
+	
 	TiXmlNode* name_node = seat_row_node->FirstChild("name");
 	assert(name_node != 0);
-	//cout << name_node->Value() << ": ";
-	//cout << name_node->FirstChild()->Value() << endl;
+	
+
     TiXmlNode* seat_node = seat_row_node->FirstChild("seat");
-    TiXmlNode* section_node = seat_node->FirstChild("section");
-    int numberOfSeats = 0;
-    Seat** seats = new Seat*[MAX_SEATS];
+	int numberOfSeats = 0;
+	
+	Seat_Row *seatRow = new Seat_Row(name_node->FirstChild()->Value(), numberOfSeats);  // creates seat_row object to be added to venue later
+	
 	while (seat_node != 0)
 	{
-		//cout << seat_node->Value() << " ";
-		seats[numberOfSeats++] = Get_Seat(seat_node);
+
+		Seat *seat = Get_Seat(seat_node);
+		
+		seatRow->Add_Seat(seat); //adds seat objects created in Get_Seat to the current seat row object
+		
 		seat_node = seat_node->NextSibling();
+		
 	}
-    Seat_Row *seatRow = new Seat_Row(name_node->FirstChild()->Value(), numberOfSeats, section_node->FirstChild()->Value());
-    seatRow->Set_Seats(seats);
-    //seatRow.Display();
     return seatRow;
 
 }
 
-void Venue_From_xml::Get_Seats(TiXmlNode* seat_row_node)
+void Venue_From_xml::Get_Seats(TiXmlNode* seat_row_node, Venue* venue)
 {
 	while (seat_row_node != 0)
 	{
-
-		Get_Seat_Row(seat_row_node);
+		
+		venue->Add_Row(Get_Seat_Row(seat_row_node));   // Adds the seat row created in Get_Seat_Row to venue's array of seat rows
 		seat_row_node = seat_row_node->NextSibling();
 
 
 	}
 }
 
+
+// This method  still needs some work with the whole section thing
 Seat* Venue_From_xml::Get_Seat(TiXmlNode* seat_node)
 {
 	TiXmlNode* number_node = seat_node->FirstChild("number");
@@ -121,8 +133,10 @@ Seat* Venue_From_xml::Get_Seat(TiXmlNode* seat_node)
     strValue >> rowNumber;
 
     Seat *seat = new Seat(seat_row_node->FirstChild()->Value(), rowNumber, section_node->FirstChild()->Value());
-    seat->Display();
-    return seat;
+   
+	//seat->Display(); for now
+   
+	return seat;
 }
 
 
