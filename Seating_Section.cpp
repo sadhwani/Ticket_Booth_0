@@ -31,11 +31,12 @@ void Seating_Section::get_element(int i,
 void Seating_Section::Display() const
 {
     cout << "Section " << name << endl;
-    for (int i = 0; i < number_of_elements; ++i)
+    /*for (int i = 0; i < number_of_elements; ++i)
     {
         cout << "Row " << elements[i].row_name
              << "  Seats " << elements[i].first_seat_number << " - " 
              << elements[i].last_seat_number  << endl;
     }
     cout << endl;
+	*/
 }

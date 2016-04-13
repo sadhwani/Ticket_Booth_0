@@ -55,17 +55,23 @@ int Venue::Capacity() const
 
 void Venue::Display() const
 {
-    //cout << name << endl;
+    cout << name << endl;
     address.Display();
 
 	for (int i = 0; i < number_of_seat_rows; i++)
 	{
 		seat_row[i]->Display();
 	}
+
+	for (int i = 0; i < number_of_seating_sections; i++)
+	{
+		seating_section[i]->Display();
+	}
+
 	
 }
 
-void Venue::Display_All() const
+/*void Venue::Display_All() const
 {
     Display();  
     for (int i = 0; i < number_of_seat_rows; ++i)
@@ -80,7 +86,7 @@ void Venue::Display_All() const
     }
     
 }
-
+*/
 
 bool Venue::operator<(const Venue& other) const
 {

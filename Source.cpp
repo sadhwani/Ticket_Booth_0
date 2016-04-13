@@ -19,8 +19,8 @@ int main()
 		cin.get();
 		exit(1);
 	}
-	cout << filename << " read from disk " << endl;
-	cout << "Printing via doc.Print \n";
+	//cout << filename << " read from disk " << endl;
+	//cout << "Printing via doc.Print \n";
 	//doc.Print(stdout);
 
 
