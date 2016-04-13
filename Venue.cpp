@@ -63,12 +63,6 @@ void Venue::Display() const
 		seat_row[i]->Display();
 	}
 
-	for (int i = 0; i < number_of_seating_sections; i++)
-	{
-		seating_section[i]->Display();
-	}
-
-	
 }
 
 /*void Venue::Display_All() const
