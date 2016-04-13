@@ -32,8 +32,14 @@ void Seat_Row::Set_Seats( Seat** seatsArray) {
 
 void Seat_Row::Display() const
 {
-    cout << "Row " << row_name << " Seats  1 - " 
-         << number_of_seats << endl;
+
+	for (int i = 0; i < number_of_seats; i++)
+	{
+		seats[i]->Display();
+	}
+
+
+   
 	//<< number_of_seats << " Section: " << section_name << endl;
 }
 //This adds a seat to the array of seats for the certain seat row.

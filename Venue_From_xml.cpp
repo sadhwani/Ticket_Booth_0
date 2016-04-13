@@ -31,10 +31,7 @@ void Venue_From_xml::Get_Venue(TiXmlNode* venue_node)
    
 	venue->Display();
     
-   
-	
-	
-	
+  
 	
 	/* Still need to add collection of Seat_Rows and Sections to Venue
         Give Seat_Row Add_Seat method
