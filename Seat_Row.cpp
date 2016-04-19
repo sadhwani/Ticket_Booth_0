@@ -1,21 +1,23 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
+
 #include <string.h>
 #include "Seat_Row.h"
-#include <cassert>
-using namespace std;
 
-Seat_Row::Seat_Row(const string& Row_Name,
-                   int Number_of_Seats) :
-                   row_name(Row_Name), number_of_seats(Number_of_Seats)
+Seat_Row::Seat_Row(const string& Row_Name) :
+                   row_name(Row_Name), number_of_seats(0)
+{}
+
+
+void Seat_Row::Add_Seat(const Seat* seat)
 {
-    // commenting out so I can set the seats array from the XML file
-//    seats = new Seat*[number_of_seats];
-//    for (int i = 0; i < number_of_seats; ++i)
-//    {
-//        seats[i] = new Seat(Row_Name, i+1, Section_Name);
-//    }
+    if (number_of_seats == MAX_SEATS_PER_ROW)
+    {
+        throw "Too many seats added to row ";
+    }
+    seats[number_of_seats++] = seat;
 }
+
+
 
 const Seat* Seat_Row::Get_Seat(int idx) const
 {
@@ -26,27 +28,12 @@ const Seat* Seat_Row::Get_Seat(int idx) const
     return seats[idx];
 }
 
-void Seat_Row::Set_Seats( Seat** seatsArray) {
-    //seats = seatsArray;
-}
-
 void Seat_Row::Display() const
 {
-
-	for (int i = 0; i < number_of_seats; i++)
-	{
-		seats[i]->Display();
-	}
-
-
-   
-	//<< number_of_seats << " Section: " << section_name << endl;
+    for (int i = 0; i < number_of_seats; ++i)
+    {
+        seats[i]->Display();
+    }
 }
-//This adds a seat to the array of seats for the certain seat row.
 
-void Seat_Row::Add_Seat(Seat* new_seat)
-{
-	assert(number_of_seats < MAX_SEATS_PER_ROW);
-	seats[number_of_seats++] = new_seat;
-	
-}
+

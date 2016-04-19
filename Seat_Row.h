@@ -12,23 +12,15 @@ public:
 
 private:
     string row_name;
-     //Seat **seats;   // Dynamically allocated array of Seat*
-	 Seat *seats[MAX_SEATS_PER_ROW];
+    const Seat* seats[MAX_SEATS_PER_ROW];
     int  number_of_seats;
-   
-	
 
 public:
-
-		Seat_Row(const string& Row_Name,
-			int Number_of_Seats);
+    Seat_Row(const string& Row_Name);
+    void Add_Seat(const Seat* seat);
+    void Display() const;
 
     string Row_Name() const {return row_name;};
     int Number_of_Seats() const {return number_of_seats;};
     const Seat* Get_Seat(int seat_nr) const;
-    void Set_Seats(Seat** seatsArray);
-
-	void Add_Seat( Seat* new_seat);
-
-    void Display() const;
 };

@@ -2,18 +2,15 @@
 #include <iostream>
 #include <string>
 #include "Venue.h"
-#include <cassert>
 
 using namespace std;
 
 Venue::Venue(const string& Name, 
              const Address& Address) :
-    name(Name), address(Address), number_of_seat_rows(0),
-    number_of_seating_sections(0)
+    name(Name), address(Address), number_of_seat_rows(0)
 {}
 
-/*void Venue::Add_Row(const string& Row_Name, 
-                    int Number_of_Seats, const string& Section_Name)
+void Venue::Add_Row(Seat_Row* new_seat_row)
 {
     if (number_of_seat_rows >= MAX_SEAT_ROWS)
     {
@@ -21,26 +18,8 @@ Venue::Venue(const string& Name,
     }
 
     unsigned int i = number_of_seat_rows++;
-	seat_row[i] = new Seat_Row(Row_Name, Number_of_Seats);
+    seat_row[i] = new_seat_row;
 }
-*/
-void Venue::Add_Row(Seat_Row *row)
-{
-	assert(number_of_seat_rows < MAX_SEAT_ROWS);
-	seat_row[number_of_seat_rows++] = row;
-
-}
-
-void Venue::Add_Seating_Section(Seating_Section* new_seating_section)
-{
-    if (number_of_seating_sections >= MAX_SEATING_SECTIONS)
-    {
-        throw "Venue error: too many seating sections\n";
-    }
-    seating_section[number_of_seating_sections++] = new_seating_section;
-}
-
-
 
 // Return number of seats
 int Venue::Capacity() const
@@ -57,30 +36,16 @@ void Venue::Display() const
 {
     cout << name << endl;
     address.Display();
-
-	for (int i = 0; i < number_of_seat_rows; i++)
-	{
-		seat_row[i]->Display();
-	}
-
 }
 
-/*void Venue::Display_All() const
+void Venue::Display_All() const
 {
-    Display();  
+    Display();
     for (int i = 0; i < number_of_seat_rows; ++i)
     {
         seat_row[i]->Display();
     }
-
-    cout << "\nSeating Sections: \n";
-    for (int i = 0; i < number_of_seating_sections; ++i)
-    {
-        seating_section[i]->Display();
-    }
-    
 }
-*/
 
 bool Venue::operator<(const Venue& other) const
 {

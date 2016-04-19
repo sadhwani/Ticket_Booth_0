@@ -14,7 +14,7 @@ private:
     const string street_address;
     const string city;
     const string state;
-    int zip_code;
+    const int zip_code;
 
 public:
     // Constructor
@@ -22,7 +22,8 @@ public:
             const string& City,
             const string& State,
             int Zip_Code);
-    Address() {};
+
+    Address();
 
     const string Street_Address() const {return street_address;};
     const string City() const  {return city;};
