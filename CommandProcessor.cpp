@@ -22,7 +22,7 @@ void CommandProcessor::Process_Commands(Venue **venues_, int num_venues_)
 	
 	while (command_state != Done)
 	{
-		if (command_state == Venue_Option)
+		if (command_state == Venue_Selected)
 		{
 			cout << "Selected venue is "
 				<< selected_venue->Name() << endl;
